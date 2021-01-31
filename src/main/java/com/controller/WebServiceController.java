@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.Task;
+import com.model.TaskStatus;
 import com.service.TaskServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,5 +26,11 @@ public class WebServiceController {
     public Task findByTaskId(@PathVariable("id") Long id){
         return taskServiceImp.findTaskById(id);
     }
+
+    @RequestMapping(value = "/list/status/{status}",method = RequestMethod.GET)
+    public List<Task> findByTaskStatus(@PathVariable("status") TaskStatus status){
+        return taskServiceImp.findTaskByStatus(status);
+    }
+
 
 }

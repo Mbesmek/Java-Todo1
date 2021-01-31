@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitab Listesi</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <!--    <link th:href="@{../css/css.css}" rel="stylesheet">-->
+</head>
+<body>
+
+<div style="width: 100%; display: table;">
+    <div style="display: table-row">
+
+        <div style="width: 600px; display: table-cell;">
+           <table class="table table-striped table-responsive-md">
+            <tr>
+
+                <th>Task Header</th>
+                <th>Task Detail</th>
+                <th>Task Point</th>
+
+            </tr>
+
+            </thead>
+
+            <tr th:each="task : ${tasks}">
+                <div style="float: left" th:if="${task.status == T(com.model.TaskStatus).TODO}">
+                    <td th:text="${task.taskHeader}"></td>
+
+                    <td th:text="${task.taskDetail}"></td>
+                    <td th:text="${task.taskPoint}"></td>
+                    <td >
+                        <form th:action="@{delete}" method="post">
+                            <input type="hidden" name="id" th:value="${task.taskId}" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </td>
+                    <td >
+                        <form th:action="@{edit}" method="get">
+                            <input type="hidden" name="id" th:value="${task.taskId}" />
+                            <input type="submit" value="Edit" class="btn btn-warning" />
+                        </form>
+                    </td>
+                </div>
+            </tr>
+           </table>
+            <p class="my-5"><a href="/pages/employee" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+        </div>
+        <div style= "margin-left: 30px; width: 50%;  float: left; background: gray;">
+
+        </div>
+        <div style="display: table-cell;">
+            <table class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                <th>Task Header</th>
+                <th>Task Detail</th>
+                <th>Task Point</th>
+            </tr>
+
+            </thead>
+
+            <tr th:each="task : ${tasks}">
+                <div style="float: left" th:if="${task.status == T(com.model.TaskStatus).INPROGRESS}">
+                    <td th:text="${task.taskHeader}"></td>
+
+                    <td th:text="${task.taskDetail}"></td>
+                    <td th:text="${task.taskPoint}"></td>
+
+                </div>
+            </tr>
+        </table>
+        </div>
+        <div style= "margin-left: 30px; width: 50%;  float: right; background: gray;">
+
+        </div>
+        <div style="display: table-cell;"> <table class="table table-striped table-responsive-md">
+        <table class="table table-striped table-responsive-md">
+        <tr>
+            <th>Task Header</th>
+            <th>Task Detail</th>
+            <th>Task Point</th>
+        </tr>
+
+        </thead>
+
+        <tr th:each="task : ${tasks}">
+            <div style="float: left" th:if="${task.status == T(com.model.TaskStatus).DONE}">
+                <td th:text="${task.taskHeader}"></td>
+
+                <td th:text="${task.taskDetail}"></td>
+                <td th:text="${task.taskPoint}"></td>
+            </div>
+        </tr>
+        </table>
+
+    </div>
+</div>
+
+
+</body>
+</html>

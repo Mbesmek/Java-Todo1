@@ -21,6 +21,11 @@ public class TaskServiceImp  implements  TaskService{
     }
 
     @Override
+    public List<Task> findTaskByStatus(TaskStatus status) {
+        return taskRepository.findTaskWithStatus(status);
+    }
+
+    @Override
     public List<Task> findAllTask() {
         return taskRepository.getAllTask();
     }
@@ -33,22 +38,40 @@ public class TaskServiceImp  implements  TaskService{
 
         }
         Task task=new Task();
+        TaskStatus status =TaskStatus.TODO;
         task.setTaskId(maxId+1);
         task.setTaskHeader(taskContext.getTaskHeader());
         task.setTaskDetail(taskContext.getTaskDetail());
         task.setTaskPoint(taskContext.getTaskPoint());
-        task.setStatus(taskContext.getStatus());
+        task.setStatus(status);
+        taskRepository.save(task);
+        return "Succes";
+    }
+
+    @Override
+    public String editTask(TaskContext taskContext) {
+        Long taskId=taskContext.getTaskId();
+        taskRepository.deleteById(taskId);
+        Task task=new Task();
+        TaskStatus status =taskContext.getStatus();
+        task.setTaskId(taskId);
+        task.setTaskHeader(taskContext.getTaskHeader());
+        task.setTaskDetail(taskContext.getTaskDetail());
+        task.setTaskPoint(taskContext.getTaskPoint());
+        task.setStatus(status);
         taskRepository.save(task);
         return "Succes";
     }
 
     @Override
     public String deleteTask(Long taskId) {
-        return null;
+        taskRepository.deleteById(taskId);
+        return "Succes";
     }
 
     @Override
     public String findTaskByHeader(String taskHeader) {
-        return null;
+        taskRepository.findTaskWithTaskHeader(taskHeader);
+        return "Succes";
     }
 }
