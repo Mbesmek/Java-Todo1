@@ -52,7 +52,7 @@ public class FrontendController {
 
         taskServiceImp.saveTask(context);
         model.addAttribute("tasks",taskServiceImp.findAllTask());
-        return "thyme_tasks_list";
+        return "redirect:list";
     }
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String getEditTaskPage(@RequestParam Long id, Model model){
@@ -64,7 +64,7 @@ public class FrontendController {
     private String editBook(@ModelAttribute TaskContext context,Model model){
         taskServiceImp.editTask(context);
         model.addAttribute("task",taskServiceImp.findAllTask());
-        return "thyme_tasks_list";
+        return "redirect:list";
     }
 
 

@@ -51,7 +51,7 @@ public class TaskServiceImp  implements  TaskService{
     @Override
     public String editTask(TaskContext taskContext) {
         Long taskId=taskContext.getTaskId();
-        taskRepository.deleteById(taskId);
+//        taskRepository.deleteById(taskId);
         Task task=new Task();
         TaskStatus status =taskContext.getStatus();
         task.setTaskId(taskId);
