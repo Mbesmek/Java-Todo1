@@ -1,1 +1,1 @@
-TODO Application has build with JAVA-Spring Boot-Hibernate-Thymleaf
+Usage Tech: JAVA-Spring Boot-Hibernate-Thymleaf
